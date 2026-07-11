@@ -7,7 +7,8 @@ import { useDeleteCabin } from "./useDeleteCabin";
 import { FaRegCopy } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
+
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -50,7 +51,7 @@ const Discount = styled.div`
 export default function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { createCabin, isPending } = useCreateCabin();
+  const { editCabin, isPending } = useEditCabin();
 
   const {
     id: cabinId,
@@ -62,7 +63,7 @@ export default function CabinRow({ cabin }) {
   } = cabin;
 
   function handleDuplicate() {
-    createCabin({
+    editCabin({
       name: `Copy of ${name}`,
       maxCapacity,
       regularPrice,

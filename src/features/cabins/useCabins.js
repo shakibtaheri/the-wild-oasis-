@@ -1,9 +1,6 @@
 import { getCabins } from "../../services/apiCabins";
 import { useQuery } from "@tanstack/react-query";
 
-import Spinner from "../../ui/Spinner";
-import CabinRow from "./CabinRow";
-
 export function useCabins() {
   const {
     isLoading,
@@ -14,5 +11,6 @@ export function useCabins() {
     queryKey: ["cabins"],
     queryFn: getCabins,
   });
+  console.log(cabins);
   return { isLoading, cabins, error };
 }

@@ -12,10 +12,11 @@ import { useEditCabin } from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
   const { id: eaditId, ...editValues } = cabinToEdit;
+  // console.log(cabinToEdit);
   const { editCabin, isEditing } = useEditCabin();
-  const { createCabin, isPending } = useCreateCabin();
+  const { createCabin, isCreating } = useCreateCabin();
 
-  const isWorking = isPending || isEditing;
+  const isWorking = isCreating || isEditing;
 
   const isEditSession = Boolean(eaditId);
 
@@ -63,8 +64,8 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
-          id="name"
-          {...register("name", { required: "This field is required" })}
+          id="cabinName"
+          {...register("cabinName", { required: "This field is required" })}
         />
       </FormRow>
 
