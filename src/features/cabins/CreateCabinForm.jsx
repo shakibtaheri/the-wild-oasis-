@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: eaditId, ...editValues } = cabinToEdit;
   // console.log(cabinToEdit);
   const { editCabin, isEditing } = useEditCabin();
@@ -60,7 +60,10 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
 
   return (
     // if not call onSubmit then call error
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -136,7 +139,7 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
 
       <FormRow>
         {/* type is an HTML attribute! and work as reset*/}
-        <Button variation="secondary" type="reset" onClick={setShowForm}>
+        <Button variation="secondary" type="reset" onClick={onCloseModal?.()}>
           Cancel
         </Button>
         <Button disabled={isWorking}>
