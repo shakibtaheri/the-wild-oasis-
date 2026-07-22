@@ -1,5 +1,4 @@
 import Button from "../../ui/Button";
-import CabinTable from "../cabins/CabinTable";
 import Modal from "../../ui/Modal";
 import CreateCabinForm from "./CreateCabinForm";
 
@@ -25,20 +24,3 @@ export default function AddCabin() {
     </div>
   );
 }
-
-// export default function AddCabin() {
-//   const [isOpenModal, setisOpenModal] = useState(false);
-
-//   return (
-//     <div>
-//       <Button onClick={() => setisOpenModal((show) => !show)}>
-//         Add new Cabin
-//       </Button>
-//       {isOpenModal && (
-//         <Modal onClose={() => setisOpenModal(false)}>
-//           <CreateCabinForm onCloseModal={() => setisOpenModal(false)} />
-//         </Modal>
-//       )}
-//     </div>
-//   );
-// }
