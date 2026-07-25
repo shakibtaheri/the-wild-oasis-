@@ -1,5 +1,4 @@
-import { supabaseUrl } from "../services/supabase";
-
+const supabaseUrl = "https://rxtuyjikrvagqaguiggu.supabase.co";
 const imageUrl = `${supabaseUrl}/storage/v1/object/public/cabin-images/`;
 
 export const cabins = [
