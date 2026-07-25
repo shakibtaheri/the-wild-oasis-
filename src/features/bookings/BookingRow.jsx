@@ -71,7 +71,7 @@ function BookingRow({
           &rarr; {numNights} night stay
         </span>
         <span>
-          {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
+          {format(new Date(startDate), "MMM dd yyyy")} &mdash;
           {format(new Date(endDate), "MMM dd yyyy")}
         </span>
       </Stacked>
