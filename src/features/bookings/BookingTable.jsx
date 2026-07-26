@@ -4,8 +4,8 @@ import Menus from "../../ui/Menus";
 import Spinner from "../../ui/Spinner";
 import Empty from "../../ui/Empty";
 
-import { useSearchParams } from "react-router-dom";
 import { useBookings } from "./useBookings";
+import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
   const { bookings, isLoading } = useBookings();
@@ -63,6 +63,9 @@ function BookingTable() {
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+        <Table.Footer>
+          <Pagination count={15} />
+        </Table.Footer>
       </Table>
     </Menus>
   );
