@@ -6,7 +6,14 @@ export async function getBookings({ filter, sortBy }) {
     .from("bookings")
     .select("*,cabins(name),guests(fullName,email)");
 
-  if (filter !== null) query[filter.method || "eq"](filter.field, filter.value);
+  // Filter
+  if (filter) query[filter.method || "eq"](filter.field, filter.value);
+
+  // Sort
+  if (sortBy)
+    query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
 
   const { data, error } = await query;
 
@@ -14,6 +21,7 @@ export async function getBookings({ filter, sortBy }) {
     console.error(error);
     throw new Error("Bookings could not be loaded", error.message);
   }
+
   return data;
 }
 
