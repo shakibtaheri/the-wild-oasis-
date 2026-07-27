@@ -4,12 +4,10 @@ import Menus from "../../ui/Menus";
 import Spinner from "../../ui/Spinner";
 import Empty from "../../ui/Empty";
 
-import { useSearchParams } from "react-router-dom";
 import { useBookings } from "./useBookings";
+import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-  const { bookings, isLoading } = useBookings();
-
   // // CLIENT SIDE FILTERING AND SORTING DATA
   // // THESE DATA FILTERING AND SORTING API SIDE
 
@@ -41,6 +39,8 @@ function BookingTable() {
   //   (a, b) => (a[field] - b[field]) * modifier,
   // );
 
+  const { bookings, count, page, isLoading } = useBookings();
+
   if (isLoading) return <Spinner />;
   if (!bookings.length) return <Empty resourceName="bookings" />;
 
@@ -57,12 +57,15 @@ function BookingTable() {
         </Table.Header>
 
         <Table.Body
-          data={bookings}
           // data={sortedBookings}
+          data={bookings}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+        <Table.Footer>
+          <Pagination count={count} currentPage={page} />
+        </Table.Footer>
       </Table>
     </Menus>
   );
