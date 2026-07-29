@@ -73,7 +73,7 @@ function CheckinBooking() {
     <>
       <Row type="horizontal">
         <Heading as="h1">Check in booking #{bookingId}</Heading>
-        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+        {/* <ButtonText onClick={moveBack}>&larr; Back</ButtonText> */}
       </Row>
 
       <BookingDataBox booking={booking} />

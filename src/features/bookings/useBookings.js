@@ -8,6 +8,9 @@ export function useBookings() {
 
   const [searchParams] = useSearchParams();
 
+  // PAGINATION
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   // 1) Filter
   const filterValue = searchParams.get("status") || "all";
   const filter =
@@ -19,9 +22,6 @@ export function useBookings() {
   const sortBy = searchParams.get("sortBy") || "startDate-desc";
   const [field, direction] = sortBy.split("-");
   const sortByRaw = { field, direction };
-
-  // PAGINATION
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   // Query
   const { data, error, isLoading } = useQuery({
@@ -38,13 +38,16 @@ export function useBookings() {
   if (page < pageCount)
     queryClient.prefetchQuery({
       queryKey: ["bookings", filter, sortByRaw, page + 1],
-      queryFn: () => getBookings({ filter, sortBy: sortByRaw, page: page + 1 }),
+      queryFn: () => getBookings({ filter, page: page + 1, sortBy: sortByRaw }),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
       queryKey: ["bookings", filter, sortByRaw, page - 1],
-      queryFn: () => getBookings({ filter, sortBy: sortByRaw, page: page - 1 }),
+      queryFn: () => {
+        getBookings({ filter, sortBy: sortByRaw, page: page - 1 });
+      },
     });
+
   return { bookings, count, error, isLoading, page };
 }
