@@ -42,7 +42,7 @@ const Discount = styled.div`
 
 export default function CabinRow({ cabin }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { editCabin, isPending } = useEditCabin();
+  const { editCabin } = useEditCabin();
 
   const {
     id: cabinId,
