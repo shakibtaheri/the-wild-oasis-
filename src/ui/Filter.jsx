@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useSearchParams } from "react-router-dom";
-import SortBy from "./SortBy";
+
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
   background-color: var(--color-grey-0);
@@ -40,8 +40,8 @@ export default function Filter({ filterField, options }) {
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   function handleClick(value) {
-    // "discount" the name in the URL
     searchParams.set(filterField, value);
+    if (searchParams.get("page")) searchParams.set("page", 1);
     setSearchParams(searchParams);
   }
 
