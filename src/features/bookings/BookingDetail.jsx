@@ -6,7 +6,7 @@ import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
-import ButtonText from "../../ui/ButtonText";
+// import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 import Empty from "../../ui/Empty";
 
@@ -15,6 +15,10 @@ import { useBooking } from "./useBooking";
 import { useNavigate } from "react-router-dom";
 import { HiArrowUpOnSquare } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
+import { MdDeleteOutline } from "react-icons/md";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -26,6 +30,7 @@ function BookingDetail() {
   const { data: booking, isLoading, error } = useBooking();
   const { status, id: bookingId } = booking ? booking : [];
   const { checkout, isLoading: isCheckout } = useCheckout();
+  const { isDeleting, deleteBookingRow } = useDeleteBooking();
 
   const navigate = useNavigate();
 
@@ -52,6 +57,22 @@ function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button variation="danger">Delete</Button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="booking"
+              disabled={isDeleting}
+              onConfirm={() => {
+                deleteBookingRow(bookingId, {
+                  onSettled: () => navigate(-1),
+                });
+              }}
+            />
+          </Modal.Window>
+        </Modal>
         {status === "unconfirmed" && (
           <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
             Check in
