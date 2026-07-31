@@ -66,7 +66,6 @@ function BookingDetail() {
               resourceName="booking"
               disabled={isDeleting}
               onConfirm={() => {
-                //on... handlers we can add into indivial mutate function (not only in useMutation function)
                 deleteBookingRow(bookingId, {
                   onSettled: () => navigate(-1),
                 });
