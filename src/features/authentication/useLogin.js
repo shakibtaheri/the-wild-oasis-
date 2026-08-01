@@ -13,7 +13,7 @@ export function useLogin() {
       // console.log(user);
       // set some data into react query cach
       queryClient.setQueriesData(["user"], user);
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     },
     onError: (err) => {
       //   console.log("ERROR", err);
