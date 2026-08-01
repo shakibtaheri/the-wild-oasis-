@@ -18,8 +18,8 @@ function LoginForm() {
       { email, password },
       {
         onSettled: () => {
-          email("");
-          password("");
+          setEmail("");
+          setPassword("");
         },
       },
     );
